@@ -1,4 +1,3 @@
-import { Item } from "./Item"
 import versionList from "../data/video-list"
 import { useEffect, useState } from "react"
 import ReactDOM from "react-dom"
@@ -8,7 +7,7 @@ import { Transition } from "@headlessui/react"
 type Props = {
 	show: boolean
 	isVideoSelected: boolean[]
-	toggleVideo: (index: number) => () => void
+	toggleVideo: (index: number) => void
 	onClose: () => void
 }
 
@@ -30,12 +29,20 @@ const SelectModal = ({
 
 	const listItems = versionList.map((version, index) => (
 		<li key={index} className="items-center justify-center">
-			<Item
-				name={version.name}
-				selectedByDefault={isVideoSelected[index]}
-				isSelectable={version.isSelectable}
-				handleClick={toggleVideo(index)}
-			/>
+			<button
+				className={`relative h-[0.75em] -skew-x-6 whitespace-nowrap font-display text-4xl leading-tight
+					${
+						version.isSelectable
+							? "text-stroke-white hover:after:content-['◀']"
+							: "opacity-25 text-stroke"
+					}
+					${isVideoSelected[index] ? "text-white" : "text-stroke"}
+					after:absolute after:-my-[0.04em] after:ml-[0.5em] after:font-sans after:leading-none after:text-white
+					lg:text-6xl lg:leading-tight 2xl:text-8xl 2xl:leading-tight`}
+				onClick={() => version.isSelectable ?? toggleVideo(index)}
+			>
+				{version.name}
+			</button>
 		</li>
 	))
 
