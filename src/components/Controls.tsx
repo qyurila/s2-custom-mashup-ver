@@ -1,7 +1,11 @@
-import Link from "next/link"
 import { Play, Square, Plus } from "lucide-react"
+import React from "react"
 
-export const Controls = () => (
+type Props = {
+	modalOpen: React.Dispatch<React.SetStateAction<boolean>>
+}
+
+export const Controls = ({ modalOpen }: Props) => (
 	<div className="container flex flex-row items-center justify-center gap-4">
 		<button className="flex h-12 w-12 items-center justify-center">
 			<Square
@@ -20,9 +24,9 @@ export const Controls = () => (
 				viewBox="-1 0 24 24"
 			/>
 		</button>
-		<Link
-			href="/select"
+		<button
 			className="flex h-12 w-12 items-center justify-center"
+			onClick={() => modalOpen(true)}
 		>
 			<Plus
 				size={36}
@@ -31,6 +35,6 @@ export const Controls = () => (
 				strokeLinejoin="miter"
 				className="stroke-gray-200 hover:stroke-white"
 			/>
-		</Link>
+		</button>
 	</div>
 )
