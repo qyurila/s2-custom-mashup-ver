@@ -3,8 +3,11 @@ import Head from "next/head"
 import { Video } from "../components/Video"
 import { Controls } from "../components/Controls"
 import usePlayersStore from "../store/players-store"
+import { useState } from "react"
+import SelectModal from "../components/SelectModal"
 
 const Home: NextPage = () => {
+	const [openSelect, setOpenSelect] = useState(false)
 	const { videos } = usePlayersStore((state) => state)
 
 	const controlVideos = (action: "play" | "pause" | "stop") => () => {
@@ -29,7 +32,14 @@ const Home: NextPage = () => {
 				<div className="container grid grid-cols-2 items-center justify-center justify-items-center px-4 py-16">
 					{players}
 				</div>
-				<Controls controlVideos={controlVideos} />
+				<Controls
+					controlVideos={controlVideos}
+					openSelect={() => setOpenSelect(true)}
+				/>
+				<SelectModal
+					isOpen={openSelect}
+					onClose={() => setOpenSelect(false)}
+				/>
 			</main>
 		</>
 	)

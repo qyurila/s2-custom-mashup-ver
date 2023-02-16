@@ -1,17 +1,25 @@
 import { Fragment } from "react"
-import { Transition } from "@headlessui/react"
-import type { NextPage } from "next"
+import { Dialog, Transition } from "@headlessui/react"
 import videoList from "../data/video-list"
-import Item from "../components/Item"
+import Item from "./Item"
 
-const Select: NextPage = () => {
+type Props = {
+	isOpen: boolean
+	onClose: () => void
+}
+
+const SelectModal = ({ isOpen, onClose }: Props) => {
 	const listItems = videoList.map((videoInfo, index) => (
 		<Item key={index} index={index} videoInfo={videoInfo} />
 	))
 
 	return (
-		<Transition show={true} as={Fragment} appear>
-			<div className="fixed inset-0 flex items-center justify-center">
+		<Transition show={isOpen} as={Fragment} appear>
+			<Dialog
+				open={isOpen}
+				onClose={onClose}
+				className="fixed inset-0 flex items-center justify-center"
+			>
 				<Transition.Child
 					as={Fragment}
 					enter="transition-opacity duration-500"
@@ -24,7 +32,7 @@ const Select: NextPage = () => {
 					<div className="fixed inset-0 bg-black" aria-hidden={true} />
 				</Transition.Child>
 
-				<div className="absolute h-[200vh] w-[200vw] -rotate-12 items-center overflow-y-auto">
+				<Dialog.Panel className="absolute h-[200vh] w-[200vw] -rotate-12 items-center overflow-y-auto">
 					<div />
 					<Transition.Child
 						as={Fragment}
@@ -39,14 +47,14 @@ const Select: NextPage = () => {
 							{listItems}
 						</ul>
 					</Transition.Child>
-				</div>
+				</Dialog.Panel>
 				<button
 					className="absolute top-0 right-0 h-8 w-8 bg-white/10"
-					// onClick={onClose}
+					onClick={onClose}
 				/>
-			</div>
+			</Dialog>
 		</Transition>
 	)
 }
 
-export default Select
+export default SelectModal
