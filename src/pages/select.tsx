@@ -1,15 +1,9 @@
 import versionList from "../data/video-list"
 import { Fragment } from "react"
-import { Transition, Dialog } from "@headlessui/react"
+import { Transition } from "@headlessui/react"
+import type { NextPage } from "next"
 
-type Props = {
-	isOpen: boolean
-	isVideoSelected: boolean[]
-	toggleVideo: (index: number) => void
-	onClose: () => void
-}
-
-const SelectModal = ({ isOpen, onClose, ...props }: Props) => {
+const Select: NextPage = () => {
 	const listItems = versionList.map((version, index) => (
 		<li key={index} className="items-center justify-center">
 			<button
@@ -19,10 +13,10 @@ const SelectModal = ({ isOpen, onClose, ...props }: Props) => {
 							? "text-stroke-white hover:after:content-['◀']"
 							: "opacity-25 text-stroke"
 					}
-					${props.isVideoSelected[index] ? "text-white" : "text-stroke"}
+					${/* props.isVideoSelected[index] ? "text-white" : */ "text-stroke"}
 					after:absolute after:-my-[0.04em] after:ml-[0.5em] after:font-sans after:leading-none after:text-white
 					lg:text-6xl lg:leading-tight 2xl:text-8xl 2xl:leading-tight`}
-				onClick={() => version.isSelectable && props.toggleVideo(index)}
+				// onClick={version.isSelectable && props.toggleVideo(index)}
 			>
 				{version.name}
 			</button>
@@ -30,12 +24,8 @@ const SelectModal = ({ isOpen, onClose, ...props }: Props) => {
 	))
 
 	return (
-		<Transition show={isOpen} as={Fragment}>
-			<Dialog
-				open={isOpen}
-				onClose={onClose}
-				className="fixed inset-0 flex items-center justify-center"
-			>
+		<Transition show={true} as={Fragment} appear>
+			<div className="fixed inset-0 flex items-center justify-center">
 				<Transition.Child
 					as={Fragment}
 					enter="transition-opacity duration-500"
@@ -48,7 +38,7 @@ const SelectModal = ({ isOpen, onClose, ...props }: Props) => {
 					<div className="fixed inset-0 bg-black" aria-hidden={true} />
 				</Transition.Child>
 
-				<Dialog.Panel className="absolute h-[200vh] w-[200vw] -rotate-12 items-center overflow-y-auto">
+				<div className="absolute h-[200vh] w-[200vw] -rotate-12 items-center overflow-y-auto">
 					<div />
 					<Transition.Child
 						as={Fragment}
@@ -63,14 +53,14 @@ const SelectModal = ({ isOpen, onClose, ...props }: Props) => {
 							{listItems}
 						</ul>
 					</Transition.Child>
-				</Dialog.Panel>
+				</div>
 				<button
 					className="absolute top-0 right-0 h-8 w-8 bg-white/10"
-					onClick={onClose}
+					// onClick={onClose}
 				/>
-			</Dialog>
+			</div>
 		</Transition>
 	)
 }
 
-export default SelectModal
+export default Select

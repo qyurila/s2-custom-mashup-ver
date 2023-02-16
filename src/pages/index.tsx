@@ -4,14 +4,12 @@ import { Video } from "../components/Video"
 import { Controls } from "../components/Controls"
 import videoList from "../data/video-list"
 import { useState } from "react"
-import SelectModal from "../components/SelectModal"
 import type { YouTubePlayer, YouTubeProps } from "react-youtube"
 
 const Home: NextPage = () => {
 	const [isVideoSelected, setIsVideoSelected] = useState(
 		videoList.map((version) => version.selectedByDefault)
 	)
-	const [isSelectModalOpen, setIsSelectModalOpen] = useState(false)
 	const [playerList, setPlayerList] = useState<YouTubePlayer[]>([])
 
 	const toggleVideo = (index: number) => {
@@ -57,20 +55,19 @@ const Home: NextPage = () => {
 				<div className="container grid grid-cols-2 items-center justify-center justify-items-center px-4 py-16">
 					{videos}
 				</div>
-				<Controls
-					playPause={playPause}
-					stopVideos={stopVideos}
-					openModal={() => setIsSelectModalOpen(true)}
-				/>
-				<SelectModal
-					onClose={() => setIsSelectModalOpen(false)}
-					isOpen={isSelectModalOpen}
-					isVideoSelected={isVideoSelected}
-					toggleVideo={(index: number) => toggleVideo(index)}
-				/>
+				<Controls playPause={playPause} stopVideos={stopVideos} />
 			</main>
 		</>
 	)
 }
 
 export default Home
+
+/*
+<SelectModal
+onClose={() => setIsSelectModalOpen(false)}
+isOpen={isSelectModalOpen}
+isVideoSelected={isVideoSelected}
+toggleVideo={(index: number) => toggleVideo(index)}
+/>
+*/

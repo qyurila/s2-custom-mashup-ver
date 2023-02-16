@@ -1,13 +1,13 @@
 import { Play, Square, Plus, Pause } from "lucide-react"
+import Link from "next/link"
 import { useState } from "react"
 
 type Props = {
 	playPause: (isPlaying: boolean) => void
 	stopVideos: () => void
-	openModal: () => void
 }
 
-export const Controls = ({ playPause, stopVideos, openModal }: Props) => {
+export const Controls = ({ playPause, stopVideos }: Props) => {
 	const [isPlaying, setIsPlaying] = useState(false)
 	const playIcon = isPlaying ? (
 		<Pause
@@ -46,16 +46,16 @@ export const Controls = ({ playPause, stopVideos, openModal }: Props) => {
 			>
 				{playIcon}
 			</button>
-			<button
+			<Link
 				className="flex h-12 w-12 items-center justify-center"
-				onClick={openModal}
+				href={`/select`}
 			>
 				<Plus
 					size={36}
 					className="stroke-gray-200 stroke-[3] hover:stroke-white"
 					strokeLinecap="square"
 				/>
-			</button>
+			</Link>
 		</div>
 	)
 }
