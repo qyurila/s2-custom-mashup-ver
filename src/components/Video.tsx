@@ -1,11 +1,27 @@
-import Image from "next/image"
+import type { YouTubeProps } from "react-youtube"
+import YouTube from "react-youtube"
 
-export const Video = () => (
-	<Image
-		src="/images/temp.jpg"
-		alt="temp"
-		width={480}
-		height={270}
-		className="rounded-lg"
-	></Image>
-)
+type Props = {
+	index: number
+	id: string
+	onReady: YouTubeProps["onReady"]
+}
+
+export const Video = (props: Props) => {
+	return (
+		<YouTube
+			videoId={props.id}
+			onReady={props.onReady}
+			opts={{
+				height: "390",
+				width: "640",
+				playerVars: {
+					controls: 0,
+					disablekb: 1,
+					modestbranding: 1,
+					start: 0,
+				},
+			}}
+		/>
+	)
+}
