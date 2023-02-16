@@ -3,11 +3,10 @@ import Link from "next/link"
 import { useState } from "react"
 
 type Props = {
-	playPause: (isPlaying: boolean) => void
-	stopVideos: () => void
+	controlVideos: (action: "play" | "pause" | "stop") => () => void
 }
 
-export const Controls = ({ playPause, stopVideos }: Props) => {
+export const Controls = ({ controlVideos }: Props) => {
 	const [isPlaying, setIsPlaying] = useState(false)
 	const playIcon = isPlaying ? (
 		<Pause
@@ -25,7 +24,14 @@ export const Controls = ({ playPause, stopVideos }: Props) => {
 	)
 
 	const handlePlayClick = () => {
-		playPause(isPlaying)
+		if (isPlaying) {
+			setIsPlaying(false)
+			controlVideos("pause")
+		} else {
+			setIsPlaying(true)
+			controlVideos("play")
+		}
+
 		setIsPlaying(!isPlaying)
 	}
 
@@ -35,7 +41,7 @@ export const Controls = ({ playPause, stopVideos }: Props) => {
 				className="flex h-12 w-12 items-center justify-center"
 				onClick={() => {
 					setIsPlaying(false)
-					stopVideos()
+					controlVideos("stop")
 				}}
 			>
 				<Square size={32} className="fill-gray-200 hover:fill-white" />

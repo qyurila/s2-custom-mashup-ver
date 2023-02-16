@@ -1,26 +1,12 @@
-import versionList from "../data/video-list"
 import { Fragment } from "react"
 import { Transition } from "@headlessui/react"
 import type { NextPage } from "next"
+import videoList from "../data/video-list"
+import Item from "../components/Item"
 
 const Select: NextPage = () => {
-	const listItems = versionList.map((version, index) => (
-		<li key={index} className="items-center justify-center">
-			<button
-				className={`relative h-[0.75em] -skew-x-6 whitespace-nowrap font-display text-4xl leading-tight
-					${
-						version.isSelectable
-							? "text-stroke-white hover:after:content-['◀']"
-							: "opacity-25 text-stroke"
-					}
-					${/* props.isVideoSelected[index] ? "text-white" : */ "text-stroke"}
-					after:absolute after:-my-[0.04em] after:ml-[0.5em] after:font-sans after:leading-none after:text-white
-					lg:text-6xl lg:leading-tight 2xl:text-8xl 2xl:leading-tight`}
-				// onClick={version.isSelectable && props.toggleVideo(index)}
-			>
-				{version.name}
-			</button>
-		</li>
+	const listItems = videoList.map((videoInfo, index) => (
+		<Item key={index} index={index} videoInfo={videoInfo} />
 	))
 
 	return (
