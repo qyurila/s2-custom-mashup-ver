@@ -11,7 +11,10 @@ const Item = ({ index, videoInfo }: Props) => {
 	const { selectedByDefault, isSelectable, title } = videoInfo
 
 	const [isSelected, setIsSelected] = useState(selectedByDefault)
-	const { appendVideo, removeVideo } = usePlayersStore((state) => state)
+	const [appendVideo, removeVideo] = usePlayersStore((state) => [
+		state.appendVideo,
+		state.removeVideo,
+	])
 
 	const handleClick = () => {
 		if (!isSelectable) return

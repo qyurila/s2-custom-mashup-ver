@@ -10,7 +10,7 @@ type Props = {
 
 export const Video = (props: Props) => {
 	const { index, videoId, offset } = props
-	const { attachPlayer } = usePlayersStore((state) => state)
+	const attachPlayer = usePlayersStore((state) => state.attachPlayer)
 
 	const onPlayerReady: YouTubeProps["onReady"] = (event) => {
 		attachPlayer(index)(event.target)

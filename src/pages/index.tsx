@@ -1,14 +1,20 @@
 import { type NextPage } from "next"
 import Head from "next/head"
-import { Video } from "../components/Video"
 import { Controls } from "../components/Controls"
 import usePlayersStore from "../store/players-store"
 import { useState } from "react"
 import SelectModal from "../components/SelectModal"
+import PlayerContainer from "../components/PlayerContainer"
 
 const Home: NextPage = () => {
-	const [openSelect, setOpenSelect] = useState(false)
-	const { videos } = usePlayersStore((state) => state)
+	const [isPlayerVisible, setIsPlayerVisible] = useState(true)
+	const [isSelectOpen, setIsSelectOpen] = useState(false)
+	const videos = usePlayersStore((state) => state.videos)
+
+	const handleCloseSelect = () => {
+		setIsSelectOpen(false)
+		setIsPlayerVisible(true)
+	}
 
 	const controlVideos = (action: "play" | "pause" | "stop") => () => {
 		videos.map(async (video) => {
@@ -17,9 +23,10 @@ const Home: NextPage = () => {
 		})
 	}
 
-	const players = videos.map((video, index) => (
-		<Video key={index} index={index} videoId={video.videoId} offset={0} />
-	))
+	const handleOpenSelect = () => {
+		setIsSelectOpen(true)
+		setTimeout(() => setIsPlayerVisible(false), 500)
+	}
 
 	return (
 		<>
@@ -29,17 +36,12 @@ const Home: NextPage = () => {
 				<link rel="icon" href="/favicon.ico" />
 			</Head>
 			<main className="fixed flex min-h-screen w-screen flex-col items-center justify-center bg-black">
-				<div className="container grid grid-cols-2 items-center justify-center justify-items-center px-4 py-16">
-					{players}
-				</div>
+				<PlayerContainer isVisible={isPlayerVisible} />
 				<Controls
 					controlVideos={controlVideos}
-					openSelect={() => setOpenSelect(true)}
+					openSelect={handleOpenSelect}
 				/>
-				<SelectModal
-					isOpen={openSelect}
-					onClose={() => setOpenSelect(false)}
-				/>
+				<SelectModal isOpen={isSelectOpen} onClose={handleCloseSelect} />
 			</main>
 		</>
 	)
