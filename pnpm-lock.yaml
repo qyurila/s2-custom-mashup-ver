@@ -1,6 +1,7 @@
 lockfileVersion: 5.4
 
 specifiers:
+  '@headlessui/react': ^1.7.11
   '@types/node': ^18.11.18
   '@types/prettier': ^2.7.2
   '@types/react': ^18.0.26
@@ -18,11 +19,13 @@ specifiers:
   react: 18.2.0
   react-dom: 18.2.0
   tailwindcss: ^3.2.0
+  tailwindcss-easing: ^0.2.1
   tailwindcss-text-fill-stroke: 2.0.0-beta.1
   typescript: ^4.9.4
   zod: ^3.20.2
 
 dependencies:
+  '@headlessui/react': 1.7.11_biqbaboplfbrettd7655fr4n2y
   lucide-react: 0.114.0_react@18.2.0
   next: 13.1.6_biqbaboplfbrettd7655fr4n2y
   react: 18.2.0
@@ -43,6 +46,7 @@ devDependencies:
   prettier: 2.8.4
   prettier-plugin-tailwindcss: 0.2.2_prettier@2.8.4
   tailwindcss: 3.2.6_postcss@8.4.21
+  tailwindcss-easing: 0.2.1_tailwindcss@3.2.6
   tailwindcss-text-fill-stroke: 2.0.0-beta.1_postcss@8.4.21
   typescript: 4.9.5
 
@@ -71,6 +75,18 @@ packages:
     transitivePeerDependencies:
       - supports-color
     dev: true
+
+  /@headlessui/react/1.7.11_biqbaboplfbrettd7655fr4n2y:
+    resolution: {integrity: sha512-EaDbVgcyiylhtskZZf4Qb/JiiByY7cYbd0qgZ9xm2pm2X7hKojG0P4TaQYKgPOV3vojPhd/pZyQh3nmRkkcSyw==}
+    engines: {node: '>=10'}
+    peerDependencies:
+      react: ^16 || ^17 || ^18
+      react-dom: ^16 || ^17 || ^18
+    dependencies:
+      client-only: 0.0.1
+      react: 18.2.0
+      react-dom: 18.2.0_react@18.2.0
+    dev: false
 
   /@humanwhocodes/config-array/0.11.8:
     resolution: {integrity: sha512-UybHIJzJnR5Qc/MsD9Kr+RpO2h+/P1GhOwdiLPXK5TWk5sgTdu88bTD9UP+CKbPPh5Rni1u0GjAdYQLemG8g+g==}
@@ -2457,6 +2473,14 @@ packages:
     dependencies:
       '@pkgr/utils': 2.3.1
       tslib: 2.5.0
+    dev: true
+
+  /tailwindcss-easing/0.2.1_tailwindcss@3.2.6:
+    resolution: {integrity: sha512-MfvXQGJOc3/o2ot98Baw7uc/yxon55AdIpC4eCG9H4dQsTzR8G4kvnzT5n6nYdRgixZhaovdPANSBlVHwYg0sA==}
+    peerDependencies:
+      tailwindcss: '>=2.0.0'
+    dependencies:
+      tailwindcss: 3.2.6_postcss@8.4.21
     dev: true
 
   /tailwindcss-text-fill-stroke/2.0.0-beta.1_postcss@8.4.21:

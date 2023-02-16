@@ -9,5 +9,8 @@ module.exports = {
 			display: ["establishRetrosansOTF", "sans-serif"],
 		},
 	},
-	plugins: [require("tailwindcss-text-fill-stroke")],
+	plugins: [
+		require("tailwindcss-text-fill-stroke"),
+		require("tailwindcss-easing"),
+	],
 }

@@ -40,16 +40,36 @@ const SelectModal = ({
 	))
 
 	const modalContent = (
-		<div className="absolute h-auto w-screen overflow-hidden bg-black">
-			<div
-				className="flex min-h-screen w-screen -rotate-12 flex-col items-center justify-center"
-				onClick={handleClose}
+		<Transition show={show}>
+			<Transition.Child
+				enter="transition-opacity duration-500"
+				enterFrom="opacity-0"
+				enterTo="opacity-100"
+				leave="transition-opacity duration-500 ease-in-cubic"
+				leaveFrom="opacity-100"
+				leaveTo="opacity-0"
 			>
-				<ul className="container flex flex-col items-center px-4 py-16">
-					{listItems}
-				</ul>
-			</div>
-		</div>
+				<div className="absolute h-auto w-screen overflow-hidden bg-black">
+					<div
+						className="flex min-h-screen w-screen -rotate-12 flex-col items-center justify-center"
+						onClick={handleClose}
+					>
+						<Transition.Child
+							enter="transition-transform duration-500"
+							enterFrom="translate-y-[100%]"
+							enterTo="translate-y-0"
+							leave="transition-transform duration-500 ease-in-cubic"
+							leaveFrom="translate-y-0"
+							leaveTo="translate-y-[-100%]"
+						>
+							<ul className="container flex flex-col items-center px-4 py-16">
+								{listItems}
+							</ul>
+						</Transition.Child>
+					</div>
+				</div>
+			</Transition.Child>
+		</Transition>
 	)
 
 	return isBrowser
