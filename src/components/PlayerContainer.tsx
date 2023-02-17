@@ -1,5 +1,5 @@
 import usePlayersStore from "../store/players-store"
-import { Video } from "./Video"
+import { Video } from "./Player"
 
 type Props = {
 	isVisible: boolean

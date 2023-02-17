@@ -1,7 +1,6 @@
 import { type NextPage } from "next"
 import Head from "next/head"
 import { Controls } from "../components/Controls"
-import usePlayersStore from "../store/players-store"
 import { useState } from "react"
 import SelectModal from "../components/SelectModal"
 import PlayerContainer from "../components/PlayerContainer"
@@ -9,18 +8,10 @@ import PlayerContainer from "../components/PlayerContainer"
 const Home: NextPage = () => {
 	const [isPlayerVisible, setIsPlayerVisible] = useState(true)
 	const [isSelectOpen, setIsSelectOpen] = useState(false)
-	const videos = usePlayersStore((state) => state.videos)
 
 	const handleCloseSelect = () => {
 		setIsSelectOpen(false)
 		setIsPlayerVisible(true)
-	}
-
-	const controlVideos = (action: "play" | "pause" | "stop") => () => {
-		videos.map(async (video) => {
-			if (!video.player) return
-			await video.player[`${action}Video`]()
-		})
 	}
 
 	const handleOpenSelect = () => {
@@ -37,10 +28,7 @@ const Home: NextPage = () => {
 			</Head>
 			<main className="fixed flex min-h-screen w-screen flex-col items-center justify-center bg-black">
 				<PlayerContainer isVisible={isPlayerVisible} />
-				<Controls
-					controlVideos={controlVideos}
-					openSelect={handleOpenSelect}
-				/>
+				<Controls openSelect={handleOpenSelect} />
 				<SelectModal isOpen={isSelectOpen} onClose={handleCloseSelect} />
 			</main>
 		</>

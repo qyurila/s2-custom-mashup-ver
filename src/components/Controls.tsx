@@ -1,13 +1,15 @@
 import { Play, Square, Plus, Pause } from "lucide-react"
 import { useState } from "react"
+import usePlayersStore from "../store/players-store"
 
 type Props = {
-	controlVideos: (action: "play" | "pause" | "stop") => () => void
 	openSelect: () => void
 }
 
-export const Controls = ({ controlVideos, openSelect }: Props) => {
+export const Controls = ({ openSelect }: Props) => {
 	const [isPlaying, setIsPlaying] = useState(false)
+	const videos = usePlayersStore((state) => state.videos)
+
 	const playIcon = isPlaying ? (
 		<Pause
 			size={48}
@@ -22,6 +24,13 @@ export const Controls = ({ controlVideos, openSelect }: Props) => {
 			viewBox="-1 0 24 24"
 		/>
 	)
+
+	const controlVideos = (action: "play" | "pause" | "stop") => {
+		videos.map(async (video) => {
+			if (!video.player) return
+			await video.player[`${action}Video`]()
+		})
+	}
 
 	const handlePlayClick = () => {
 		if (isPlaying) {

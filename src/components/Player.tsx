@@ -21,11 +21,11 @@ export const Video = (props: Props) => {
 			videoId={videoId}
 			onReady={onPlayerReady}
 			opts={{
-				height: "390",
-				width: "640",
 				playerVars: {
 					controls: 0,
 					disablekb: 1,
+					fs: 0,
+					iv_load_policy: 3,
 					modestbranding: 1,
 					start: offset,
 				},
