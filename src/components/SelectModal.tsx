@@ -32,8 +32,7 @@ const SelectModal = ({ isOpen, onClose }: Props) => {
 					<div className="fixed inset-0 bg-black" aria-hidden={true} />
 				</Transition.Child>
 
-				<Dialog.Panel className="absolute h-[200vh] w-[200vw] -rotate-12 items-center overflow-y-auto">
-					<div />
+				<div className="absolute h-[200vh] w-[200vw] -rotate-12 overflow-y-auto">
 					<Transition.Child
 						as={Fragment}
 						enter="transition-transform duration-500"
@@ -43,11 +42,14 @@ const SelectModal = ({ isOpen, onClose }: Props) => {
 						leaveFrom="translate-y-0"
 						leaveTo="translate-y-[-100vh]"
 					>
-						<ul className="my-[100vh] flex flex-col items-center justify-center">
+						<Dialog.Panel
+							as="ul"
+							className="my-[100vh] mx-auto flex w-fit flex-col items-center justify-center"
+						>
 							{listItems}
-						</ul>
+						</Dialog.Panel>
 					</Transition.Child>
-				</Dialog.Panel>
+				</div>
 				<button
 					className="absolute top-0 right-0 h-8 w-8 bg-white/10"
 					onClick={onClose}
