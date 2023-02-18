@@ -17,19 +17,22 @@ export const Video = (props: Props) => {
 	}
 
 	return (
-		<YouTube
-			videoId={videoId}
-			onReady={onPlayerReady}
-			opts={{
-				playerVars: {
-					controls: 0,
-					disablekb: 1,
-					fs: 0,
-					iv_load_policy: 3,
-					modestbranding: 1,
-					start: offset,
-				},
-			}}
-		/>
+		<div className="relative">
+			<div className="absolute inset-0 z-10" />
+			<YouTube
+				videoId={videoId}
+				onReady={onPlayerReady}
+				opts={{
+					playerVars: {
+						controls: 0,
+						disablekb: 1,
+						fs: 0,
+						iv_load_policy: 3,
+						modestbranding: 1,
+						start: offset,
+					},
+				}}
+			/>
+		</div>
 	)
 }
