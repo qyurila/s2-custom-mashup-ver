@@ -1,26 +1,45 @@
+import { arraySwap, useSortable } from "@dnd-kit/sortable"
+import { CSS } from "@dnd-kit/utilities"
 import type { YouTubeProps } from "react-youtube"
 import YouTube from "react-youtube"
+import type { VideoInfo } from "../data/video-infos"
 import usePlayersStore from "../store/players-store"
 
 type Props = {
-	index: number
-	videoId: string
-	offset: number
+	id: number
+	info: VideoInfo
 }
 
-export const Video = (props: Props) => {
-	const { index, videoId, offset } = props
+export const Player = (props: Props) => {
+	const { id, info } = props
 	const attachPlayer = usePlayersStore((state) => state.attachPlayer)
 
+	const sortable = useSortable({
+		id,
+		getNewIndex: ({ id, items, activeIndex, overIndex }) => {
+			console.log("getNewIndex", id, items, activeIndex, overIndex)
+			return arraySwap(items, activeIndex, overIndex).indexOf(id)
+		},
+	})
+
 	const onPlayerReady: YouTubeProps["onReady"] = (event) => {
-		attachPlayer(index)(event.target)
+		attachPlayer(id, event.target)
 	}
 
 	return (
-		<div className="relative">
+		<div
+			className="relative"
+			ref={sortable.setNodeRef}
+			style={{
+				transform: CSS.Transform.toString(sortable.transform),
+				transition: sortable.transition,
+			}}
+			{...sortable.attributes}
+			{...sortable.listeners}
+		>
 			<div className="absolute inset-0 z-10" />
 			<YouTube
-				videoId={videoId}
+				videoId={info.id}
 				onReady={onPlayerReady}
 				opts={{
 					playerVars: {
@@ -29,7 +48,7 @@ export const Video = (props: Props) => {
 						fs: 0,
 						iv_load_policy: 3,
 						modestbranding: 1,
-						start: offset,
+						start: info.offset,
 					},
 				}}
 			/>

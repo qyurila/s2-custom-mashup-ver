@@ -1,43 +1,47 @@
 import type { YouTubePlayer } from "react-youtube"
 import { create } from "zustand"
-import videoList from "../data/video-list"
+import type { VideoInfo } from "../data/video-infos"
+import videoInfos from "../data/video-infos"
 
-type SelectedVideo = {
-	order: number
-	videoId: string
+export type SelectedVideo = {
+	id: number
+	info: VideoInfo
 	player?: YouTubePlayer
 }
 
 type PlayersState = {
 	videos: SelectedVideo[]
-	appendVideo: (order: number, videoId: string) => void
-	removeVideo: (order: number) => void
-	attachPlayer: (order: number) => (player: YouTubePlayer) => void
+	appendVideo: (id: number) => void
+	removeVideo: (id: number) => void
+	attachPlayer: (id: number, player: YouTubePlayer) => void
 }
 
 const usePlayersStore = create<PlayersState>()((set) => ({
-	videos: videoList
-		.filter((video) => video.selectedByDefault)
-		.map((video, index) => ({
-			order: index,
-			videoId: video.videoId,
-			player: undefined,
-		})),
+	videos: videoInfos
+		.map((info, index) => ({
+			id: index + 1,
+			info,
+		}))
+		.filter((video) => video.info.selectedByDefault),
 
-	appendVideo: (order: number, videoId: string) =>
+	appendVideo: (id: number) => {
+		const info = videoInfos[id - 1]
+		if (!info) return
+
+		return set((state) => ({
+			videos: [...state.videos, { id, info }],
+		}))
+	},
+
+	removeVideo: (id: number) =>
 		set((state) => ({
-			videos: [...state.videos, { order, videoId, player: undefined }],
+			videos: state.videos.filter((video) => video.id !== id),
 		})),
 
-	removeVideo: (order: number) =>
-		set((state) => ({
-			videos: state.videos.filter((player) => player.order !== order),
-		})),
-
-	attachPlayer: (order: number) => (player: YouTubePlayer) =>
+	attachPlayer: (id: number, player: YouTubePlayer) =>
 		set((state) => ({
 			videos: state.videos.map((video) =>
-				video.order === order ? { ...video, player } : video
+				video.id === id ? { ...video, player } : video
 			),
 		})),
 }))
