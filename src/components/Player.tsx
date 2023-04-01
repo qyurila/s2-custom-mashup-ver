@@ -8,7 +8,7 @@ type Props = {
 	info: VideoInfo
 }
 
-export const Player = (props: Props) => {
+const Player = (props: Props) => {
 	const { id, info } = props
 
 	const sortable = useSortable({
@@ -52,3 +52,5 @@ export const Player = (props: Props) => {
 		</div>
 	)
 }
+
+export default Player

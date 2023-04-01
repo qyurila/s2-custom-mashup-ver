@@ -6,7 +6,7 @@ import {
 } from "@dnd-kit/sortable"
 import { useEffect, useState } from "react"
 import usePlayersStore from "../store/players-store"
-import { Player } from "./Player"
+import Player from "./Player"
 
 type Props = {
 	isVisible: boolean
@@ -61,4 +61,5 @@ const PlayerContainer = (props: Props) => {
 		</>
 	)
 }
+
 export default PlayerContainer

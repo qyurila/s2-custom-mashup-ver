@@ -5,7 +5,7 @@ type Props = {
 	openSelect: () => void
 }
 
-export const Controls = ({ openSelect }: Props) => {
+const Controls = ({ openSelect }: Props) => {
 	const [isPlaying, setIsPlaying] = useState(false)
 
 	const playIcon = isPlaying ? (
@@ -69,3 +69,5 @@ export const Controls = ({ openSelect }: Props) => {
 		</div>
 	)
 }
+
+export default Controls
