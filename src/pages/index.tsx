@@ -3,6 +3,7 @@ import Head from "next/head"
 import { useEffect, useState } from "react"
 import AboutButton from "../components/AboutButton"
 import Controls from "../components/Controls"
+import IntroDialog from "../components/IntroDialog"
 import ListModal from "../components/ListModal"
 import PlayerContainer from "../components/PlayerContainer"
 import RealPlayer from "../components/RealPlayer"
@@ -49,6 +50,7 @@ const Home: NextPage = () => {
 				<ListModal isOpen={isListOpen} onClose={handleCloseList} />
 			</main>
 			{!isPlaying && <AboutButton />}
+			<IntroDialog isActive={!isSplashOn} />
 			<Splash isSplashOn={isSplashOn} />
 		</>
 	)
