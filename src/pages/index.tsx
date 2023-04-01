@@ -25,15 +25,15 @@ const Home: NextPage = () => {
 		setIsListOpen(true)
 		setTimeout(() => setIsPlayerVisible(false), 500)
 	}
-	const splashTimer = setTimeout(() => {
+	const mainSplashTimer = setTimeout(() => {
 		setIsSplashOn(false)
-	}, 1000)
+	}, 1500)
 
 	useEffect(() => {
 		return () => {
-			clearTimeout(splashTimer)
+			clearTimeout(mainSplashTimer)
 		}
-	}, [splashTimer])
+	}, [mainSplashTimer])
 
 	return (
 		<>
