@@ -1,7 +1,8 @@
 import { type NextPage } from "next"
 import Head from "next/head"
-import { Controls } from "../components/Controls"
 import { useState } from "react"
+import AboutButton from "../components/AboutButton"
+import Controls from "../components/Controls"
 import ListModal from "../components/ListModal"
 import PlayerContainer from "../components/PlayerContainer"
 
@@ -31,6 +32,7 @@ const Home: NextPage = () => {
 				<Controls openSelect={handleOpenSelect} />
 				<ListModal isOpen={isSelectOpen} onClose={handleCloseSelect} />
 			</main>
+			<AboutButton />
 		</>
 	)
 }
