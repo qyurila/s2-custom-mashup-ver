@@ -23,7 +23,7 @@ const AboutButton = () => {
 			>
 				<div>
 					<h3 className="pr-2 text-right font-caption text-2xl text-gray-200">
-						웹페이지 개발 및 배포
+						웹페이지 제작 및 배포
 					</h3>
 					<h2 className="pr-2 text-right font-caption text-3xl text-gray-200">
 						릴라
