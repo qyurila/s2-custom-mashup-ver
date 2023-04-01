@@ -50,6 +50,8 @@ const IntroDialog = ({ isActive }: { isActive: boolean }) => {
 											삭제해보세요.
 											<br />
 											기타 문제가 생기면 새로고침을 눌러주세요.
+											<br />이 페이지는 모바일 환경에서 제대로
+											작동하지 않을 수 있습니다.
 										</p>
 									</div>
 
