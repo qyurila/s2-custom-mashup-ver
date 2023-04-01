@@ -7,6 +7,7 @@ module.exports = {
 		fontFamily: {
 			sans: ["Arial", "sans-serif", "system-ui"],
 			display: ["establishRetrosansOTF", "sans-serif"],
+			caption: ["var(--font-pureun-jeonnam-bold)", "sans-serif"],
 		},
 	},
 	plugins: [

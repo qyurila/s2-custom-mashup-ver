@@ -1,9 +1,7 @@
 import { arraySwap, useSortable } from "@dnd-kit/sortable"
 import { CSS } from "@dnd-kit/utilities"
-import type { YouTubeProps } from "react-youtube"
-import YouTube from "react-youtube"
 import type { VideoInfo } from "../data/video-infos"
-import usePlayersStore from "../store/players-store"
+import Image from "next/image"
 
 type Props = {
 	id: number
@@ -12,23 +10,17 @@ type Props = {
 
 export const Player = (props: Props) => {
 	const { id, info } = props
-	const attachPlayer = usePlayersStore((state) => state.attachPlayer)
 
 	const sortable = useSortable({
 		id,
 		getNewIndex: ({ id, items, activeIndex, overIndex }) => {
-			console.log("getNewIndex", id, items, activeIndex, overIndex)
 			return arraySwap(items, activeIndex, overIndex).indexOf(id)
 		},
 	})
 
-	const onPlayerReady: YouTubeProps["onReady"] = (event) => {
-		attachPlayer(id, event.target)
-	}
-
 	return (
 		<div
-			className="relative"
+			className="group relative flex items-center justify-center active:z-10"
 			ref={sortable.setNodeRef}
 			style={{
 				transform: CSS.Transform.toString(sortable.transform),
@@ -37,20 +29,25 @@ export const Player = (props: Props) => {
 			{...sortable.attributes}
 			{...sortable.listeners}
 		>
-			<div className="absolute inset-0 z-10" />
-			<YouTube
-				videoId={info.id}
-				onReady={onPlayerReady}
-				opts={{
-					playerVars: {
-						controls: 0,
-						disablekb: 1,
-						fs: 0,
-						iv_load_policy: 3,
-						modestbranding: 1,
-						start: info.offset,
-					},
-				}}
+			<div
+				className="
+					absolute inset-0 bg-black opacity-0 transition-opacity duration-150
+					group-hover:opacity-40 group-active:opacity-60
+				"
+			/>
+			<h4
+				className="
+					absolute text-center font-caption text-xl text-white opacity-0 transition duration-75
+					group-hover:opacity-100 group-active:opacity-0 md:text-2xl lg:text-3xl 2xl:text-4xl
+				"
+			>
+				{info.title.split("S2 합작 ")}
+			</h4>
+			<Image
+				src={`https://img.youtube.com/vi/${info.id}/maxresdefault.jpg`}
+				alt={info.title}
+				width={1280}
+				height={720}
 			/>
 		</div>
 	)

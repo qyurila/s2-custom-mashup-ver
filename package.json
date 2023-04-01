@@ -13,6 +13,7 @@
 		"@dnd-kit/sortable": "^7.0.2",
 		"@dnd-kit/utilities": "^3.2.1",
 		"@headlessui/react": "^1.7.11",
+		"@next/font": "^13.2.4",
 		"lucide-react": "^0.114.0",
 		"next": "13.1.6",
 		"react": "18.2.0",
