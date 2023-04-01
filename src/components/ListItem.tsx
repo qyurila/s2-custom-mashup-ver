@@ -3,7 +3,7 @@ import type { VideoInfo } from "../data/video-infos"
 import usePlayersStore from "../store/players-store"
 
 type Props = {
-	id: number
+	id: string
 	videoInfo: VideoInfo
 }
 

@@ -14,7 +14,7 @@ type Props = {
 
 const PlayerContainer = (props: Props) => {
 	const videos = usePlayersStore(useCallback((state) => state.videos, []))
-	const [sortItems, setSortItems] = useState<number[]>([
+	const [sortItems, setSortItems] = useState<string[]>([
 		...videos.map((video) => video.id),
 	])
 
@@ -22,8 +22,8 @@ const PlayerContainer = (props: Props) => {
 		const { active, over } = event
 		if (!over || active.id === over.id) return
 
-		const oldIndex = sortItems.indexOf(Number(active.id))
-		const newIndex = sortItems.indexOf(Number(over.id))
+		const oldIndex = sortItems.indexOf(String(active.id))
+		const newIndex = sortItems.indexOf(String(over.id))
 		setSortItems(arraySwap(sortItems, oldIndex, newIndex))
 	}
 

@@ -4,7 +4,7 @@ import type { VideoInfo } from "../data/video-infos"
 import Image from "next/image"
 
 type Props = {
-	id: number
+	id: string
 	info: VideoInfo
 }
 

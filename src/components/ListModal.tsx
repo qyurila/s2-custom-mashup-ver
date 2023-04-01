@@ -10,7 +10,10 @@ type Props = {
 
 const ListModal = ({ isOpen, onClose }: Props) => {
 	const listItems = videoInfos.map((videoInfo, index) => (
-		<ListItem key={index} id={index + 1} videoInfo={videoInfo} />
+		// We can't assign a number to the id prop because of the following bug:
+		// Cannot drag items with falsy identifiers (such as 0)
+		// https://github.com/clauderic/dnd-kit/issues/858
+		<ListItem key={index} id={String(index)} videoInfo={videoInfo} />
 	))
 
 	return (
@@ -44,14 +47,14 @@ const ListModal = ({ isOpen, onClose }: Props) => {
 					>
 						<Dialog.Panel
 							as="ul"
-							className="my-[100vh] mx-auto flex w-fit flex-col items-center justify-center"
+							className="mx-auto my-[100vh] flex w-fit flex-col items-center justify-center"
 						>
 							{listItems}
 						</Dialog.Panel>
 					</Transition.Child>
 				</div>
 				<button
-					className="absolute top-0 right-0 h-8 w-8 bg-white/10"
+					className="absolute right-0 top-0 h-8 w-8 bg-white/10"
 					onClick={onClose}
 				/>
 			</Dialog>
