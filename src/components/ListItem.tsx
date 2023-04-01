@@ -7,7 +7,7 @@ type Props = {
 	videoInfo: VideoInfo
 }
 
-const Item = (props: Props) => {
+const ListItem = (props: Props) => {
 	const { id, videoInfo } = props
 	const { title, isSelectable } = videoInfo
 
@@ -54,4 +54,4 @@ const Item = (props: Props) => {
 	)
 }
 
-export default Item
+export default ListItem

@@ -1,16 +1,16 @@
 import { Fragment } from "react"
 import { Dialog, Transition } from "@headlessui/react"
 import videoInfos from "../data/video-infos"
-import Item from "./Item"
+import ListItem from "./ListItem"
 
 type Props = {
 	isOpen: boolean
 	onClose: () => void
 }
 
-const SelectModal = ({ isOpen, onClose }: Props) => {
+const ListModal = ({ isOpen, onClose }: Props) => {
 	const listItems = videoInfos.map((videoInfo, index) => (
-		<Item key={index} id={index + 1} videoInfo={videoInfo} />
+		<ListItem key={index} id={index + 1} videoInfo={videoInfo} />
 	))
 
 	return (
@@ -59,4 +59,4 @@ const SelectModal = ({ isOpen, onClose }: Props) => {
 	)
 }
 
-export default SelectModal
+export default ListModal

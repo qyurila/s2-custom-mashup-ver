@@ -2,7 +2,7 @@ import { type NextPage } from "next"
 import Head from "next/head"
 import { Controls } from "../components/Controls"
 import { useState } from "react"
-import SelectModal from "../components/SelectModal"
+import ListModal from "../components/ListModal"
 import PlayerContainer from "../components/PlayerContainer"
 
 const Home: NextPage = () => {
@@ -29,7 +29,7 @@ const Home: NextPage = () => {
 			<main className="fixed flex min-h-screen w-screen flex-col items-center justify-center bg-black">
 				<PlayerContainer isVisible={isPlayerVisible} />
 				<Controls openSelect={handleOpenSelect} />
-				<SelectModal isOpen={isSelectOpen} onClose={handleCloseSelect} />
+				<ListModal isOpen={isSelectOpen} onClose={handleCloseSelect} />
 			</main>
 		</>
 	)
