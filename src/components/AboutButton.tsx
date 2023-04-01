@@ -1,6 +1,7 @@
 import { Transition } from "@headlessui/react"
 import { Info } from "lucide-react"
 import Image from "next/image"
+import Link from "next/link"
 import { useState } from "react"
 
 const AboutButton = () => {
@@ -29,13 +30,15 @@ const AboutButton = () => {
 						릴라
 					</h2>
 				</div>
-				<Image
-					className="mr-1 rounded-full"
-					src="/images/about.jpg"
-					alt="about"
-					width={72}
-					height={72}
-				/>
+				<Link href="https://rentry.co/xtt9f">
+					<Image
+						className="mr-1 rounded-full"
+						src="/images/about.jpg"
+						alt="about"
+						width={72}
+						height={72}
+					/>
+				</Link>
 			</Transition>
 			<Transition
 				show={!isAboutOpen}
