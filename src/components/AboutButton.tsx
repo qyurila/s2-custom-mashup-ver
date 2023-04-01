@@ -30,15 +30,13 @@ const AboutButton = () => {
 						릴라
 					</h2>
 				</div>
-				<Link href={"https://www.youtube.com/@rea9lizer"}>
-					<Image
-						className="mr-1 rounded-full"
-						src="/images/about.jpg"
-						alt="about"
-						width={72}
-						height={72}
-					/>
-				</Link>
+				<Image
+					className="mr-1 rounded-full"
+					src="/images/about.jpg"
+					alt="about"
+					width={72}
+					height={72}
+				/>
 			</Transition>
 			<Transition
 				show={!isAboutOpen}
