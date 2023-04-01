@@ -25,7 +25,7 @@ const usePlayersStore = create<PlayersState>()((set) => ({
 		const info = videoInfos[Number(id)]
 		if (!info) return
 
-		return set((state) => ({
+		set((state) => ({
 			videos: [...state.videos, { id, info }],
 		}))
 	},

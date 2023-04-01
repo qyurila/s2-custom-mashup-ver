@@ -14,4 +14,9 @@ module.exports = {
 		require("tailwindcss-text-fill-stroke"),
 		require("tailwindcss-easing"),
 	],
+	safelist: [
+		{
+			pattern: /grid-cols-./,
+		},
+	],
 }

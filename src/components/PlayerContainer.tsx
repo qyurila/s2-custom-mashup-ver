@@ -4,7 +4,7 @@ import {
 	rectSwappingStrategy,
 	SortableContext,
 } from "@dnd-kit/sortable"
-import { useCallback, useState } from "react"
+import { useEffect, useState } from "react"
 import usePlayersStore from "../store/players-store"
 import { Player } from "./Player"
 
@@ -13,10 +13,14 @@ type Props = {
 }
 
 const PlayerContainer = (props: Props) => {
-	const videos = usePlayersStore(useCallback((state) => state.videos, []))
+	const videos = usePlayersStore((state) => state.videos)
 	const [sortItems, setSortItems] = useState<string[]>([
 		...videos.map((video) => video.id),
 	])
+
+	useEffect(() => {
+		setSortItems([...videos.map((video) => video.id)])
+	}, [videos])
 
 	const handleDragEnd = (event: DragEndEvent) => {
 		const { active, over } = event
@@ -35,12 +39,15 @@ const PlayerContainer = (props: Props) => {
 			return <Player key={video.id} {...video} />
 		})
 
-	// TODO: Reimplement DnD without sortable (and grid).
-	// Sortable makes rerendering inevitable. Tried memoizing Player, but it didn't help.
 	return (
 		<>
 			{props.isVisible && (
-				<div className="grid grid-cols-2 items-center justify-center px-4 py-16">
+				<div
+					className={`
+					grid items-center justify-center px-4 py-16
+					grid-cols-${Math.ceil(Math.sqrt(videos.length))}
+				`}
+				>
 					<DndContext onDragEnd={handleDragEnd}>
 						<SortableContext
 							items={sortItems}

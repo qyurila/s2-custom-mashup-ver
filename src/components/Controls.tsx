@@ -1,6 +1,5 @@
 import { Play, Square, Plus, Pause } from "lucide-react"
 import { useState } from "react"
-import usePlayersStore from "../store/players-store"
 
 type Props = {
 	openSelect: () => void
@@ -8,7 +7,6 @@ type Props = {
 
 export const Controls = ({ openSelect }: Props) => {
 	const [isPlaying, setIsPlaying] = useState(false)
-	const videos = usePlayersStore((state) => state.videos)
 
 	const playIcon = isPlaying ? (
 		<Pause
@@ -25,20 +23,17 @@ export const Controls = ({ openSelect }: Props) => {
 		/>
 	)
 
-	const controlVideos = (action: "play" | "pause" | "stop") => {
-		videos.map(async (video) => {
-			if (!video.player) return
-			await video.player[`${action}Video`]()
-		})
+	const controlVideo = (action: "play" | "pause" | "stop") => {
+		console.log(action)
 	}
 
 	const handlePlayClick = () => {
 		if (isPlaying) {
 			setIsPlaying(false)
-			controlVideos("pause")
+			controlVideo("pause")
 		} else {
 			setIsPlaying(true)
-			controlVideos("play")
+			controlVideo("play")
 		}
 
 		setIsPlaying(!isPlaying)
@@ -50,7 +45,7 @@ export const Controls = ({ openSelect }: Props) => {
 				className="flex h-12 w-12 items-center justify-center"
 				onClick={() => {
 					setIsPlaying(false)
-					controlVideos("stop")
+					controlVideo("stop")
 				}}
 			>
 				<Square size={32} className="fill-gray-200 hover:fill-white" />
