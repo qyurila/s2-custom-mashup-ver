@@ -9,6 +9,8 @@ export type SelectedVideo = {
 
 type PlayersState = {
 	videos: SelectedVideo[]
+	isPlaying: boolean
+	setIsPlaying: (isPlaying: boolean) => void
 	appendVideo: (id: string) => void
 	removeVideo: (id: string) => void
 }
@@ -20,6 +22,10 @@ const usePlayersStore = create<PlayersState>()((set) => ({
 			info,
 		}))
 		.filter((video) => video.info.selectedByDefault),
+
+	isPlaying: false,
+
+	setIsPlaying: (isPlaying: boolean) => set({ isPlaying }),
 
 	appendVideo: (id: string) => {
 		const info = videoInfos[Number(id)]

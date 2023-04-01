@@ -8,12 +8,11 @@ import { useEffect, useState } from "react"
 import usePlayersStore from "../store/players-store"
 import Player from "./Player"
 
-type Props = {
-	isVisible: boolean
-}
-
-const PlayerContainer = (props: Props) => {
-	const videos = usePlayersStore((state) => state.videos)
+const PlayerContainer = () => {
+	const [videos, isPlaying] = usePlayersStore((state) => [
+		state.videos,
+		state.isPlaying,
+	])
 	const [sortItems, setSortItems] = useState<string[]>([
 		...videos.map((video) => video.id),
 	])
@@ -41,23 +40,22 @@ const PlayerContainer = (props: Props) => {
 
 	return (
 		<>
-			{props.isVisible && (
-				<div
-					className={`
+			<div
+				className={`
 					grid items-center justify-center px-4 py-16
 					grid-cols-${Math.ceil(Math.sqrt(videos.length))}
+					${isPlaying ? "opacity-0" : "opacity-100"}
 				`}
-				>
-					<DndContext onDragEnd={handleDragEnd}>
-						<SortableContext
-							items={sortItems}
-							strategy={rectSwappingStrategy}
-						>
-							{players}
-						</SortableContext>
-					</DndContext>
-				</div>
-			)}
+			>
+				<DndContext onDragEnd={handleDragEnd}>
+					<SortableContext
+						items={sortItems}
+						strategy={rectSwappingStrategy}
+					>
+						{players}
+					</SortableContext>
+				</DndContext>
+			</div>
 		</>
 	)
 }

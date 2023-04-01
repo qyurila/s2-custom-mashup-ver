@@ -1,24 +1,39 @@
 import { type NextPage } from "next"
 import Head from "next/head"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import AboutButton from "../components/AboutButton"
 import Controls from "../components/Controls"
 import ListModal from "../components/ListModal"
 import PlayerContainer from "../components/PlayerContainer"
+import RealPlayer from "../components/RealPlayer"
+import Splash from "../components/Splash"
+import usePlayersStore from "../store/players-store"
 
 const Home: NextPage = () => {
-	const [isPlayerVisible, setIsPlayerVisible] = useState(true)
-	const [isSelectOpen, setIsSelectOpen] = useState(false)
+	const [isPlaying, setIsPlayerVisible] = usePlayersStore((state) => [
+		state.isPlaying,
+		state.setIsPlaying,
+	])
+	const [isListOpen, setIsListOpen] = useState(false)
+	const [isSplashOn, setIsSplashOn] = useState(true)
 
-	const handleCloseSelect = () => {
-		setIsSelectOpen(false)
-		setIsPlayerVisible(true)
+	const handleCloseList = () => {
+		setIsListOpen(false)
 	}
 
-	const handleOpenSelect = () => {
-		setIsSelectOpen(true)
+	const handleOpenList = () => {
+		setIsListOpen(true)
 		setTimeout(() => setIsPlayerVisible(false), 500)
 	}
+	const splashTimer = setTimeout(() => {
+		setIsSplashOn(false)
+	}, 1000)
+
+	useEffect(() => {
+		return () => {
+			clearTimeout(splashTimer)
+		}
+	}, [splashTimer])
 
 	return (
 		<>
@@ -28,11 +43,13 @@ const Home: NextPage = () => {
 				<link rel="icon" href="/favicon.ico" />
 			</Head>
 			<main className="fixed flex min-h-screen w-screen flex-col items-center justify-center bg-black">
-				<PlayerContainer isVisible={isPlayerVisible} />
-				<Controls openSelect={handleOpenSelect} />
-				<ListModal isOpen={isSelectOpen} onClose={handleCloseSelect} />
+				{isPlaying && <RealPlayer width={globalThis.innerWidth - 32} />}
+				<PlayerContainer />
+				<Controls openList={handleOpenList} />
+				<ListModal isOpen={isListOpen} onClose={handleCloseList} />
 			</main>
-			<AboutButton />
+			{!isPlaying && <AboutButton />}
+			<Splash isSplashOn={isSplashOn} />
 		</>
 	)
 }

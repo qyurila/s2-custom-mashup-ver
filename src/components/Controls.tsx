@@ -1,12 +1,15 @@
 import { Play, Square, Plus, Pause } from "lucide-react"
-import { useState } from "react"
+import usePlayersStore from "../store/players-store"
 
 type Props = {
-	openSelect: () => void
+	openList: () => void
 }
 
-const Controls = ({ openSelect }: Props) => {
-	const [isPlaying, setIsPlaying] = useState(false)
+const Controls = ({ openList }: Props) => {
+	const [isPlaying, setIsPlaying] = usePlayersStore((state) => [
+		state.isPlaying,
+		state.setIsPlaying,
+	])
 
 	const playIcon = isPlaying ? (
 		<Pause
@@ -58,7 +61,7 @@ const Controls = ({ openSelect }: Props) => {
 			</button>
 			<button
 				className="flex h-12 w-12 items-center justify-center"
-				onClick={openSelect}
+				onClick={openList}
 			>
 				<Plus
 					size={36}
