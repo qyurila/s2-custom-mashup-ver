@@ -8,7 +8,7 @@ export type VideoInfo = {
 
 const videoInfos: VideoInfo[] = [
 	{
-		title: "S2 합작버전",
+		title: "S2 합작버젼",
 		id: "OJuHhpnoJ6s",
 		isSelectable: true,
 		selectedByDefault: true,
