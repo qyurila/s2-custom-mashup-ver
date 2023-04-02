@@ -42,7 +42,7 @@ const PlayerContainer = () => {
 		<>
 			<div
 				className={`
-					grid items-center justify-center px-4 py-16
+					grid items-center justify-center px-4 py-16 2xl:w-[70%]
 					grid-cols-${Math.ceil(Math.sqrt(videos.length))}
 					${isPlaying ? "opacity-0" : "opacity-100"}
 				`}

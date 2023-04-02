@@ -6,7 +6,7 @@ const Splash = ({ isSplashOn }: { isSplashOn: boolean }) => {
 		<Transition
 			show={isSplashOn}
 			appear={true}
-			className="absolute my-auto flex h-[100vh] w-full items-center bg-black"
+			className="absolute z-10 my-auto flex h-[100vh] w-full items-center justify-center bg-black"
 			enter="transition duration-1000 ease-in-out"
 			enterFrom="opacity-0 translate-y-[20vh]"
 			enterTo="opacity-100 translate-y-0"
@@ -14,14 +14,12 @@ const Splash = ({ isSplashOn }: { isSplashOn: boolean }) => {
 			leaveFrom="opacity-100 translate-y-0"
 			leaveTo="opacity-0 translate-y-[-20vh]"
 		>
-			<div className="absolute z-10">
-				<Image
-					src="/images/splash.png"
-					alt="splash"
-					width={1920}
-					height={1080}
-				/>
-			</div>
+			<Image
+				src="/images/splash.png"
+				alt="splash"
+				width={1920}
+				height={1080}
+			/>
 		</Transition>
 	)
 }
